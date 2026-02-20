@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.5'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    // Camunda artifacts may not be available only on Maven Central for some versions;
+    // add Camunda's public repository as a fallback.
+    maven { url 'https://app.camunda.com/nexus/content/repositories/public/' }
+    maven { url 'https://packages.camunda.org/maven' }
+}
+
+dependencyManagement {
+    imports {
+        // Import Camunda BOM to align Camunda-related versions
+        // Use the correct groupId 'org.camunda.bpm' so Gradle can resolve the BOM
+        mavenBom 'org.camunda.bpm:camunda-bom:7.20.0'
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Camunda Spring Boot starters
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest'
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp'
+    // Camunda Spin for JSON mapping
+    implementation 'org.camunda.spin:camunda-spin-core'
+    implementation 'org.camunda.spin:camunda-spin-dataformat-json-jackson'
+    // In-memory database for development
+    runtimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
