@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_1p073z5" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.44.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="Decision_079285x" name="Decision 1" camunda:historyTimeToLive="36500">
+    <decisionTable id="DecisionTable_1m954fw" hitPolicy="FIRST">
+      <input id="Input_1" label="creditScore">
+        <inputExpression id="InputExpression_1" typeRef="integer">
+          <text>creditScore</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_16ttmc0" label="debtToIncomeRatio">
+        <inputExpression id="LiteralExpression_10xsj30" typeRef="double">
+          <text>debtToIncomeRatio</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1dfp87h" label="existingDefaults">
+        <inputExpression id="LiteralExpression_02p5t7c" typeRef="boolean">
+          <text>existingDefaults</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ymsqvc" label="loanAmountRatio">
+        <inputExpression id="LiteralExpression_197fitw" typeRef="double">
+          <text>loanAmountRatio</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="decision" name="decision " typeRef="string">
+        <outputValues id="UnaryTests_18df1he">
+          <text>"REJECT","APPROVE","REVIEW"</text>
+        </outputValues>
+      </output>
+      <output id="OutputClause_1dc1con" label="interestRateTier" name="interestRateTier" typeRef="double" />
+      <rule id="DecisionRule_14ipr33">
+        <inputEntry id="UnaryTests_1kqlcpu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a7c2yd">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_061kxjv">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ndba88">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0azwcl3">
+          <text>REJECT</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1u4fd4k">
+          <text></text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0d86omy">
+        <inputEntry id="UnaryTests_0ew8i8q">
+          <text>&gt;= 720</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qqpj0b">
+          <text>&lt;= 0.35</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1tozerb">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lql424">
+          <text>&lt;= 0.8</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dux2n4">
+          <text>APPROVE</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_05i15pj">
+          <text>6.5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1w7uji5">
+        <inputEntry id="UnaryTests_03rewpc">
+          <text>&lt; 720</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17qs6ss">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gyptwc">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1d9sssn">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0ngs0ej">
+          <text>REVIEW</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1onudcl">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape id="Decision_079285x_di" dmnElementRef="Decision_079285x">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
