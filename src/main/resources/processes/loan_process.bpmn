@@ -3,12 +3,7 @@
   <bpmn:process id="Process_0wne8ii" isExecutable="true" camunda:historyTimeToLive="365000">
     <bpmn:extensionElements />
     <bpmn:startEvent id="StartEvent_1" name="start loan">
-      <bpmn:extensionElements>
-        <camunda:executionListener class="" event="start" />
-        <camunda:properties>
-          <camunda:property />
-        </camunda:properties>
-      </bpmn:extensionElements>
+      <bpmn:extensionElements />
       <bpmn:outgoing>Flow_08henq7</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:serviceTask id="Activity_1myunhq" camunda:class="com.example.loanapplication.delegate.EvaluateCreditDecisionDelegate">
@@ -44,11 +39,11 @@
       <bpmn:incoming>Flow_13yig1f</bpmn:incoming>
       <bpmn:outgoing>Flow_1h7u330</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1mdoyl1" camunda:delegateExpression="com.example.loanapplication.delegate.ReviewService">
+    <bpmn:serviceTask id="Activity_1mdoyl1" camunda:class="com.example.loanapplication.delegate.ReviewService">
       <bpmn:incoming>Flow_06r5av0</bpmn:incoming>
       <bpmn:outgoing>Flow_1m8bnwo</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="Activity_1o1emnx" camunda:delegateExpression="com.example.loanapplication.delegate.RejectService">
+    <bpmn:serviceTask id="Activity_1o1emnx" camunda:class="com.example.loanapplication.delegate.RejectService">
       <bpmn:incoming>Flow_1sxw4o4</bpmn:incoming>
       <bpmn:outgoing>Flow_0yrzrr8</bpmn:outgoing>
     </bpmn:serviceTask>

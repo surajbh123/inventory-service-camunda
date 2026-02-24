@@ -1,5 +1,6 @@
 package com.example.loanapplication.delegate;
 
+import org.camunda.bpm.dmn.engine.DmnDecisionRuleResult;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.camunda.bpm.engine.variable.VariableMap;
@@ -33,7 +34,7 @@ public class EvaluateCreditDecisionDelegate implements JavaDelegate {
                 .putValue("existingDefaults", existingDefaults)
                 .putValue("loanAmountRatio", loanAmountRatio);
 
-        DmnDecisionTableResult result = decisionService.evaluateDecisionTableByKey("CreditDecision", variables);
+        DmnDecisionTableResult result = decisionService.evaluateDecisionTableByKey("Decision_079285x", variables);
 
         if (result == null || result.isEmpty()) {
             execution.setVariable("decision", "REVIEW");
@@ -41,9 +42,11 @@ public class EvaluateCreditDecisionDelegate implements JavaDelegate {
         }
 
         // take first matched rule
-        Map<String, Object> first = result.get(0);
-        Object decision = first.get("decision");
-        Object interest = first.get("interestRateTier");
+        DmnDecisionRuleResult first = result.get(0);
+
+        // Retrieve values using .get() which returns the raw Object (String, Double, etc.)
+        String decision = (String) first.get("decision");
+        Double interest = (Double) first.get("interestRateTier");
 
         execution.setVariable("decision", decision);
         execution.setVariable("interestRateTier", interest);

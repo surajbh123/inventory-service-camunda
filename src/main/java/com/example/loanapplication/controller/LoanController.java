@@ -36,7 +36,7 @@ public class LoanController {
                 .putValue("loanAmountRatio", applicant.getLoanAmountRatio());
 
         // evaluate DMN directly so we can return a synchronous response to the caller
-        DmnDecisionTableResult result = decisionService.evaluateDecisionTableByKey("CreditDecision", variables);
+        DmnDecisionTableResult result = decisionService.evaluateDecisionTableByKey("Decision_079285x", variables);
 
         String decision = "REVIEW";
         String interestRateTier = null;
@@ -58,7 +58,7 @@ public class LoanController {
         vars.put("decision", decision);
         vars.put("interestRateTier", interestRateTier);
 
-        ProcessInstance pi = runtimeService.startProcessInstanceByKey("loan_process", vars);
+        ProcessInstance pi = runtimeService.startProcessInstanceByKey("Process_0wne8ii", vars);
 
         // build a simple synchronous response
         Map<String, Object> response = new HashMap<>();
