@@ -9,3 +9,5 @@ ENV POSTGRES_PASSWORD=camunda
 # docker build -t camunda-postgres .
 # then run the container with:
 # docker run -d --name camunda-postgres -p 5432:5432 camunda-postgres
+# Stop and delete the container in same command:
+# docker rm -f camunda-postgres
