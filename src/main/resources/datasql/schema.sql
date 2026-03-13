@@ -6,3 +6,6 @@ CREATE TABLE IF NOT EXISTS inventory (
   parent_id BIGINT REFERENCES inventory(id) ON DELETE SET NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT now()
 );
+
+
+
