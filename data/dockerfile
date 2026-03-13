@@ -1,0 +1,11 @@
+FROM postgres:18-alpine
+
+ENV POSTGRES_DB=camunda
+ENV POSTGRES_USER=camunda
+ENV POSTGRES_PASSWORD=camunda
+
+# COPY init.sql /docker-entrypoint-initdb.d/
+# run this docker file with the command:
+# docker build -t camunda-postgres .
+# then run the container with:
+# docker run -d --name camunda-postgres -p 5432:5432 camunda-postgres

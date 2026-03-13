@@ -30,6 +30,11 @@ dependencyManagement {
 }
 
 dependencies {
+    // Postgress and hibernate dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    runtimeOnly 'org.postgresql:postgresql'
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // Camunda Spring Boot starters
     implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'
