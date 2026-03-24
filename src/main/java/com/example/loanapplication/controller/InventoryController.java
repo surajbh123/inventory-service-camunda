@@ -33,8 +33,6 @@ public class InventoryController {
 
         Map<String, Object> vars = new HashMap<>();
         ProcessInstance pi = runtimeService.startProcessInstanceByKey("Process_0pswi9n",vars);
-
-
         return ResponseEntity.ok("success");
 
     }

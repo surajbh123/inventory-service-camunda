@@ -15,5 +15,18 @@ public class StockCheckService implements JavaDelegate {
     @Override
     public void execute(DelegateExecution execution) throws Exception {
             LOGGER.info("checking Stock limit");
+            // create Random number to simulate stock check
+            int stockCheckResult = (int) (Math.random() * 100);
+            // create random threshold for stock check
+            int stockThreshold = 50;
+            // set variable based on stock check result
+            if (stockCheckResult > stockThreshold) {
+                execution.setVariable("stockCheckPassed", true);
+                LOGGER.info("Stock check passed with result: {}", stockCheckResult);
+            } else {
+                execution.setVariable("stockCheckPassed", false);
+                LOGGER.info("Stock check failed with result: {}", stockCheckResult);
+            }
+
     }
 }

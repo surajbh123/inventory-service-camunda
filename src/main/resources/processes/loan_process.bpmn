@@ -28,16 +28,12 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${decision == 'REJECTED'}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:endEvent id="Event_0ah8y2s">
-      <bpmn:incoming>Flow_1h7u330</bpmn:incoming>
       <bpmn:incoming>Flow_1m8bnwo</bpmn:incoming>
-      <bpmn:incoming>Flow_0yrzrr8</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1h7u330" sourceRef="Activity_16dyyqd" targetRef="Event_0ah8y2s" />
     <bpmn:sequenceFlow id="Flow_1m8bnwo" sourceRef="Activity_1mdoyl1" targetRef="Event_0ah8y2s" />
-    <bpmn:sequenceFlow id="Flow_0yrzrr8" sourceRef="Activity_1o1emnx" targetRef="Event_0ah8y2s" />
     <bpmn:serviceTask id="Activity_16dyyqd" camunda:class="com.example.loanapplication.delegate.ApproveService">
       <bpmn:incoming>Flow_13yig1f</bpmn:incoming>
-      <bpmn:outgoing>Flow_1h7u330</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0yhbmp6</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_1mdoyl1" camunda:class="com.example.loanapplication.delegate.ReviewService">
       <bpmn:incoming>Flow_06r5av0</bpmn:incoming>
@@ -45,8 +41,16 @@
     </bpmn:serviceTask>
     <bpmn:serviceTask id="Activity_1o1emnx" camunda:class="com.example.loanapplication.delegate.RejectService">
       <bpmn:incoming>Flow_1sxw4o4</bpmn:incoming>
-      <bpmn:outgoing>Flow_0yrzrr8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1a5qq3y</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_00g6cfo">
+      <bpmn:incoming>Flow_0yhbmp6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0yhbmp6" sourceRef="Activity_16dyyqd" targetRef="Event_00g6cfo" />
+    <bpmn:endEvent id="Event_0sin6a1">
+      <bpmn:incoming>Flow_1a5qq3y</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1a5qq3y" sourceRef="Activity_1o1emnx" targetRef="Event_0sin6a1" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0wne8ii">
@@ -74,6 +78,12 @@
       <bpmndi:BPMNShape id="Activity_0dhvu52_di" bpmnElement="Activity_1o1emnx">
         <dc:Bounds x="666" y="310" width="100" height="80" />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00g6cfo_di" bpmnElement="Event_00g6cfo">
+        <dc:Bounds x="872" y="112" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0sin6a1_di" bpmnElement="Event_0sin6a1">
+        <dc:Bounds x="882" y="332" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_08henq7_di" bpmnElement="Flow_08henq7">
         <di:waypoint x="188" y="240" />
         <di:waypoint x="294" y="240" />
@@ -87,7 +97,7 @@
         <di:waypoint x="530" y="130" />
         <di:waypoint x="666" y="130" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="548" y="113" width="53" height="14" />
+          <dc:Bounds x="575" y="113" width="53" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06r5av0_di" bpmnElement="Flow_06r5av0">
@@ -102,24 +112,20 @@
         <di:waypoint x="530" y="350" />
         <di:waypoint x="666" y="350" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="560" y="333" width="59" height="14" />
+          <dc:Bounds x="572" y="333" width="59" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1h7u330_di" bpmnElement="Flow_1h7u330">
-        <di:waypoint x="766" y="130" />
-        <di:waypoint x="801" y="130" />
-        <di:waypoint x="801" y="240" />
-        <di:waypoint x="872" y="240" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1m8bnwo_di" bpmnElement="Flow_1m8bnwo">
         <di:waypoint x="766" y="240" />
         <di:waypoint x="872" y="240" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0yrzrr8_di" bpmnElement="Flow_0yrzrr8">
+      <bpmndi:BPMNEdge id="Flow_0yhbmp6_di" bpmnElement="Flow_0yhbmp6">
+        <di:waypoint x="766" y="130" />
+        <di:waypoint x="872" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a5qq3y_di" bpmnElement="Flow_1a5qq3y">
         <di:waypoint x="766" y="350" />
-        <di:waypoint x="801" y="350" />
-        <di:waypoint x="801" y="240" />
-        <di:waypoint x="872" y="240" />
+        <di:waypoint x="882" y="350" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
