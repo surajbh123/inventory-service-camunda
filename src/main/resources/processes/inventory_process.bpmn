@@ -56,6 +56,7 @@
     <bpmn:sequenceFlow id="Flow_1nu5ckp" sourceRef="Activity_18gt51t" targetRef="Gateway_1jyvvcd" />
     <bpmn:callActivity id="Activity_0nlp4t5" name="payment process" calledElement="Process_0gml2es">
       <bpmn:extensionElements>
+        <camunda:in local="true" variables="all" />
         <camunda:in businessKey="#{execution.processBusinessKey}" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1vf2atp</bpmn:incoming>
@@ -63,6 +64,7 @@
     </bpmn:callActivity>
     <bpmn:callActivity id="Activity_04qpyil" name="payment process" calledElement="Process_0gml2es">
       <bpmn:extensionElements>
+        <camunda:in local="true" variables="all" />
         <camunda:in businessKey="#{execution.processBusinessKey}" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1qr48xt</bpmn:incoming>

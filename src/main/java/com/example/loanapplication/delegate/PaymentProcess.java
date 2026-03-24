@@ -48,14 +48,11 @@ public class PaymentProcess implements JavaDelegate {
             execution.setVariable("paymentStatus", "SUCCESS");
         } catch (InterruptedException e) {
             LOGGER.error("Payment processing was interrupted for order ID: {}", orderId, e);
-            execution.setVariable("errorMessage", "PAYMENT_INTERRUPTED");
-
             Thread.currentThread().interrupt();
             throw new BpmnError("ERR_CLEANUP_REQUIRED", "Payment processing was interrupted");
         } catch (BpmnError e) {
-            throw e; // Re-throw BpmnError to be handled by the process
+            throw new BpmnError("ERR_CLEANUP_REQUIRED", e.getMessage());
         } catch (Exception e) {
-            execution.setVariable("errorMessage", "UNEXPECTED_ERROR");
             LOGGER.error("An unexpected error occurred during payment processing for order ID: {}", orderId, e);
             throw new BpmnError("ERR_CLEANUP_REQUIRED", "An unexpected error occurred during payment processing");
         }
