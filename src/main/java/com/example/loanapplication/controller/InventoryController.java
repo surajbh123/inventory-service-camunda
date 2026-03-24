@@ -5,6 +5,8 @@ import org.camunda.bpm.dmn.engine.DmnDecisionTableResult;
 import org.camunda.bpm.engine.DecisionService;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;
+import org.camunda.bpm.engine.variable.VariableMap;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,8 +34,10 @@ public class InventoryController {
     public ResponseEntity<String> checkInventory() {
 
         Map<String, Object> vars = new HashMap<>();
-        ProcessInstance pi = runtimeService.startProcessInstanceByKey("Process_0pswi9n",vars);
-        return ResponseEntity.ok("success");
+        ProcessInstanceWithVariables pi = (ProcessInstanceWithVariables) runtimeService.startProcessInstanceByKey("Process_0pswi9n",vars);
+        VariableMap variables = pi.getVariables();
+        String result = (String) variables.get("result");
+        return ResponseEntity.ok(result);
 
     }
 }

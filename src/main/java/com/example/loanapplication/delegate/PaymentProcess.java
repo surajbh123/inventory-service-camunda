@@ -39,6 +39,8 @@ public class PaymentProcess implements JavaDelegate {
 
             if (!success) {
                 LOGGER.error("Payment processing failed for order ID: {}", orderId);
+                execution.setVariable("errorMessage", "PAYMENT_INTERRUPTED");
+
                 throw new BpmnError("ERR_CLEANUP_REQUIRED", "Payment processing failed");
             }
 
@@ -46,12 +48,14 @@ public class PaymentProcess implements JavaDelegate {
             execution.setVariable("paymentStatus", "SUCCESS");
         } catch (InterruptedException e) {
             LOGGER.error("Payment processing was interrupted for order ID: {}", orderId, e);
-            execution.setVariable("paymentStatus", "FAILED");
+            execution.setVariable("errorMessage", "PAYMENT_INTERRUPTED");
+
             Thread.currentThread().interrupt();
             throw new BpmnError("ERR_CLEANUP_REQUIRED", "Payment processing was interrupted");
         } catch (BpmnError e) {
             throw e; // Re-throw BpmnError to be handled by the process
         } catch (Exception e) {
+            execution.setVariable("errorMessage", "UNEXPECTED_ERROR");
             LOGGER.error("An unexpected error occurred during payment processing for order ID: {}", orderId, e);
             throw new BpmnError("ERR_CLEANUP_REQUIRED", "An unexpected error occurred during payment processing");
         }

@@ -29,6 +29,7 @@ public class ReOrderPointService implements JavaDelegate {
 
             if (!success) {
                 // This triggers the Event Subprocess
+                execution.setVariable("errorMessage", "Failed to process reOrderPointService data");
                 throw new BpmnError("ERR_CLEANUP_REQUIRED", "Failed to process data");
             }
         } catch (Exception e) {
