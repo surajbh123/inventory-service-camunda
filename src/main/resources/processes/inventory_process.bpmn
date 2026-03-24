@@ -76,7 +76,24 @@
       <bpmn:outgoing>Flow_0cbsbd3</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:sequenceFlow id="Flow_0cbsbd3" sourceRef="Activity_04qpyil" targetRef="Event_020z4d2" />
+    <bpmn:subProcess id="Activity_022logr" name="error" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_0hacdj0" name="Global Error Handler">
+        <bpmn:outgoing>Flow_1h8wq8d</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_15b2x7m" errorRef="Error_13kx0ze" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1h8wq8d" sourceRef="Event_0hacdj0" targetRef="Activity_0fzhgq9" />
+      <bpmn:serviceTask id="Activity_0fzhgq9" name="Error Cleanup" camunda:delegateExpression="#{errorCleanupDelegate}">
+        <bpmn:incoming>Flow_1h8wq8d</bpmn:incoming>
+        <bpmn:outgoing>Flow_0gagol9</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="Event_1pw0rnp">
+        <bpmn:incoming>Flow_0gagol9</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0gagol9" sourceRef="Activity_0fzhgq9" targetRef="Event_1pw0rnp" />
+    </bpmn:subProcess>
   </bpmn:process>
+  <bpmn:error id="Error_1lnjkav" name="General Error" errorCode="ERR_GENERAL" camunda:errorMessage="An error occurred" />
+  <bpmn:error id="Error_13kx0ze" name="General Error" errorCode="ERR_CLEANUP_REQUIRED" camunda:errorMessage="An error occurred" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0pswi9n">
       <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
@@ -117,6 +134,31 @@
         <dc:Bounds x="380" y="80" width="100" height="80" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0gf5xpr_di" bpmnElement="Activity_022logr" isExpanded="true">
+        <dc:Bounds x="590" y="540" width="450" height="200" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18w89po_di" bpmnElement="Event_0hacdj0">
+        <dc:Bounds x="662" y="632" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="650" y="675" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0n3v2pk_di" bpmnElement="Activity_0fzhgq9">
+        <dc:Bounds x="750" y="610" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pw0rnp_di" bpmnElement="Event_1pw0rnp">
+        <dc:Bounds x="902" y="632" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1h8wq8d_di" bpmnElement="Flow_1h8wq8d">
+        <di:waypoint x="698" y="650" />
+        <di:waypoint x="750" y="650" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gagol9_di" bpmnElement="Flow_0gagol9">
+        <di:waypoint x="850" y="650" />
+        <di:waypoint x="902" y="650" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1a6jv0v_di" bpmnElement="Flow_1a6jv0v">
         <di:waypoint x="188" y="120" />
         <di:waypoint x="380" y="120" />
