@@ -31,12 +31,12 @@ public class InventoryController {
 
 
     @PostMapping("/check")
-    public ResponseEntity<String> checkInventory() {
+    public ResponseEntity<Object> checkInventory() {
 
         Map<String, Object> vars = new HashMap<>();
         ProcessInstanceWithVariables pi = (ProcessInstanceWithVariables) runtimeService.startProcessInstanceByKey("Process_0pswi9n",vars);
         VariableMap variables = pi.getVariables();
-        String result = (String) variables.get("result");
+        Object result = variables.get("result");
         return ResponseEntity.ok(result);
 
     }
