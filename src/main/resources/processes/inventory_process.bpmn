@@ -33,9 +33,11 @@
     <bpmn:sequenceFlow id="Flow_185khlz" sourceRef="Gateway_0p3apx2" targetRef="Activity_1rd416w" />
     <bpmn:sequenceFlow id="Flow_1qr48xt" sourceRef="Activity_1rd416w" targetRef="Activity_04qpyil" />
     <bpmn:subProcess id="Activity_18gt51t" name="stock check and reorder point">
+      <bpmn:extensionElements />
       <bpmn:incoming>Flow_1a6jv0v</bpmn:incoming>
       <bpmn:outgoing>Flow_1nu5ckp</bpmn:outgoing>
       <bpmn:startEvent id="Event_07o0j3y">
+        <bpmn:extensionElements />
         <bpmn:outgoing>Flow_1a61scy</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:serviceTask id="Activity_007p3nj" name="Stock Check" camunda:delegateExpression="#{stockCheckDelegate}">
@@ -56,16 +58,16 @@
     <bpmn:sequenceFlow id="Flow_1nu5ckp" sourceRef="Activity_18gt51t" targetRef="Gateway_1jyvvcd" />
     <bpmn:callActivity id="Activity_0nlp4t5" name="payment process" calledElement="Process_0gml2es">
       <bpmn:extensionElements>
-        <camunda:in local="true" variables="all" />
         <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:out source="errorMessage" target="errorMessage" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1vf2atp</bpmn:incoming>
       <bpmn:outgoing>Flow_0h5w9hb</bpmn:outgoing>
     </bpmn:callActivity>
     <bpmn:callActivity id="Activity_04qpyil" name="payment process" calledElement="Process_0gml2es">
       <bpmn:extensionElements>
-        <camunda:in local="true" variables="all" />
         <camunda:in businessKey="#{execution.processBusinessKey}" />
+        <camunda:out source="errorMessage" target="errorMessage" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1qr48xt</bpmn:incoming>
       <bpmn:outgoing>Flow_0ovof9y</bpmn:outgoing>
@@ -103,7 +105,8 @@
     <bpmn:sequenceFlow id="Flow_1bfrxrb" sourceRef="Activity_07n8va0" targetRef="Event_0jm4gl1" />
   </bpmn:process>
   <bpmn:error id="Error_1lnjkav" name="General Error" errorCode="ERR_GENERAL" camunda:errorMessage="An error occurred" />
-  <bpmn:error id="Error_13kx0ze" name="General Error" errorCode="ERR_CLEANUP_REQUIRED" camunda:errorMessage="An error occurred" />
+  <bpmn:error id="Error_13kx0ze" name="General Error1" errorCode="ERR_CLEANUP_REQUIRED" camunda:errorMessage="An error occurred" />
+  <bpmn:error id="Error_0vlutme" name="General Error" errorCode="ERR_CLEANUP_REQUIRED" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_0pswi9n">
       <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
